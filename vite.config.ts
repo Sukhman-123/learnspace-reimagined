@@ -7,6 +7,10 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  // Netlify needs its own Nitro server-function output instead of the
+  // wrapper's Cloudflare default. TanStack Start still writes client assets
+  // to dist/client, which matches the Netlify publish directory.
+  nitro: { preset: "netlify" },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
