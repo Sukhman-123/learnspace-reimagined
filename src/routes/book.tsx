@@ -30,8 +30,7 @@ export const Route = createFileRoute("/book")({
       { property: "og:title", content: "Book a Masterclass — Fixed Tutor" },
       {
         property: "og:description",
-        content:
-          "Reserve a €10 one-to-one masterclass with an IIT-trained maths tutor.",
+        content: "Reserve a €10 one-to-one masterclass with an IIT-trained maths tutor.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -89,8 +88,8 @@ function Pill({
 function BookPage() {
   const { tutor: tutorParam } = Route.useSearch();
   const [step, setStep] = useState(0);
-  const [chosen, setChosen] = useState(
-    () => (tutorParam && TUTORS.some((t) => t.id === tutorParam) ? tutorParam : TUTORS[0].id),
+  const [chosen, setChosen] = useState(() =>
+    tutorParam && TUTORS.some((t) => t.id === tutorParam) ? tutorParam : TUTORS[0].id,
   );
   const [sel, setSel] = useState({
     lv: "AS Maths",
@@ -280,7 +279,9 @@ function BookPage() {
               )}
 
               <h2 className="mt-7 font-display text-lg font-bold">Your dedicated tutor</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">You’ll work one-to-one with the same tutor throughout your learning plan.</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                You’ll work one-to-one with the same tutor throughout your learning plan.
+              </p>
             </div>
 
             <aside className="h-fit rounded-2xl border-2 border-foreground bg-card p-6 lg:sticky lg:top-24 hard-shadow">
@@ -314,7 +315,11 @@ function BookPage() {
 
         {/* Step 1 — details */}
         {step === 1 && (
-          <form onSubmit={submitDetails} className="mt-10 rounded-2xl border border-border bg-card p-6 sm:p-8" noValidate>
+          <form
+            onSubmit={submitDetails}
+            className="mt-10 rounded-2xl border border-border bg-card p-6 sm:p-8"
+            noValidate
+          >
             <label className={labelCls} htmlFor="f-tutor">
               Tutor
             </label>
@@ -377,12 +382,7 @@ function BookPage() {
                 <label className={labelCls} htmlFor="f-sn">
                   Student’s name
                 </label>
-                <input
-                  id="f-sn"
-                  name="sn"
-                  defaultValue={form.sn ?? ""}
-                  className={inputCls}
-                />
+                <input id="f-sn" name="sn" defaultValue={form.sn ?? ""} className={inputCls} />
               </div>
             </div>
 
@@ -391,12 +391,7 @@ function BookPage() {
                 <label className={labelCls} htmlFor="f-lv">
                   Level
                 </label>
-                <select
-                  id="f-lv"
-                  name="lv"
-                  defaultValue={form.lv ?? sel.lv}
-                  className={inputCls}
-                >
+                <select id="f-lv" name="lv" defaultValue={form.lv ?? sel.lv} className={inputCls}>
                   {LEVELS.map((lv) => (
                     <option key={lv}>{lv}</option>
                   ))}
@@ -406,12 +401,7 @@ function BookPage() {
                 <label className={labelCls} htmlFor="f-bd">
                   Exam board
                 </label>
-                <select
-                  id="f-bd"
-                  name="bd"
-                  defaultValue={form.bd ?? sel.bd}
-                  className={inputCls}
-                >
+                <select id="f-bd" name="bd" defaultValue={form.bd ?? sel.bd} className={inputCls}>
                   {BOARD_OPTIONS.map((bd) => (
                     <option key={bd}>{bd}</option>
                   ))}
@@ -436,17 +426,15 @@ function BookPage() {
                 <label className={labelCls} htmlFor="f-tp">
                   Topic to try in the masterclass (optional)
                 </label>
-                <input
-                  id="f-tp"
-                  name="tp"
-                  defaultValue={form.tp ?? ""}
-                  className={inputCls}
-                />
+                <input id="f-tp" name="tp" defaultValue={form.tp ?? ""} className={inputCls} />
               </div>
             </div>
 
             {error && (
-              <p role="alert" className="mt-4 rounded-lg bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive">
+              <p
+                role="alert"
+                className="mt-4 rounded-lg bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive"
+              >
                 {error}
               </p>
             )}
@@ -542,8 +530,8 @@ function BookPage() {
                     Email us to pick a time
                   </a>
                   <p className="mt-3 text-sm text-muted-foreground">
-                    The online calendar is being set up — email us and we’ll send you the
-                    available evening slots.
+                    The online calendar is being set up — email us and we’ll send you the available
+                    evening slots.
                   </p>
                 </>
               ) : (
@@ -558,9 +546,12 @@ function BookPage() {
               )}
             </div>
             <p className="mt-6 border-t border-dashed border-border pt-5 text-sm text-muted-foreground">
-              After the masterclass, choose your tutor and start the first chapter.
-              Questions? Write to{" "}
-              <a href={`mailto:${CONFIG.email}`} className="font-semibold text-primary underline underline-offset-2">
+              After the masterclass, choose your tutor and start the first chapter. Questions? Write
+              to{" "}
+              <a
+                href={`mailto:${CONFIG.email}`}
+                className="font-semibold text-primary underline underline-offset-2"
+              >
                 {CONFIG.email}
               </a>
               .
@@ -663,9 +654,11 @@ function BookPage() {
                   onChange={(e) => setCc(e.target.value)}
                   className="w-24 shrink-0 rounded-lg border border-input bg-background px-2 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring"
                 >
-                  {["+44", "+49", "+33", "+31", "+353", "+41", "+46", "+39", "+34", "+91"].map((c) => (
-                    <option key={c}>{c}</option>
-                  ))}
+                  {["+44", "+49", "+33", "+31", "+353", "+41", "+46", "+39", "+34", "+91"].map(
+                    (c) => (
+                      <option key={c}>{c}</option>
+                    ),
+                  )}
                 </select>
                 <input
                   id="r-phone"

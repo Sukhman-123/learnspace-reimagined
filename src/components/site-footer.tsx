@@ -9,8 +9,8 @@ export function SiteFooter() {
         <div>
           <Logo light />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-primary-foreground/80">
-            One-to-one AS, A Level and IB maths tutoring. One dedicated tutor from the
-            first question to the final exam.
+            One-to-one AS, A Level and IB maths tutoring. One dedicated tutor from the first
+            question to the final exam.
           </p>
         </div>
         <div>

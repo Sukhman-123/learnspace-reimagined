@@ -40,9 +40,8 @@ function PricingPage() {
             <span className="highlight">Fixed</span> pricing: one capped price per chapter
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-            The only thing you pay before meeting your tutor is the masterclass. After
-            that, every chapter has one maximum price — however many sessions or doubts
-            it takes.
+            The only thing you pay before meeting your tutor is the masterclass. After that, every
+            chapter has one maximum price — however many sessions or doubts it takes.
           </p>
         </Reveal>
 
@@ -62,8 +61,7 @@ function PricingPage() {
                 </span>
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                A live one-to-one masterclass on a real topic, with the tutor of your
-                choice.
+                A live one-to-one masterclass on a real topic, with the tutor of your choice.
               </p>
               <Link
                 to="/book"
@@ -106,12 +104,9 @@ function PricingPage() {
         </div>
 
         <Reveal>
-          <h2 className="mt-16 font-display text-2xl font-extrabold sm:text-3xl">
-            Chapter prices
-          </h2>
+          <h2 className="mt-16 font-display text-2xl font-extrabold sm:text-3xl">Chapter prices</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            These are the capped prices — the most a chapter can cost, however long it
-            takes.
+            These are the capped prices — the most a chapter can cost, however long it takes.
           </p>
         </Reveal>
 
@@ -175,8 +170,8 @@ function PricingPage() {
               Start with the €{CONFIG.demoPrice} masterclass
             </h2>
             <p className="mt-3 text-primary-foreground/75">
-              Meet your tutor, see the teaching style, then decide. {CONFIG.slotsLeft}{" "}
-              slots left this week.
+              Meet your tutor, see the teaching style, then decide. {CONFIG.slotsLeft} slots left
+              this week.
             </p>
             <Link
               to="/book"

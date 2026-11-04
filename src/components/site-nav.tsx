@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 
 const LINKS = [
@@ -28,6 +28,19 @@ export function Logo({ light }: { light?: boolean }) {
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   const linkCls =
     "rounded-lg px-3 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-accent/70 hover:text-primary data-[status=active]:text-primary";
@@ -50,35 +63,51 @@ export function SiteNav() {
           Book a masterclass <ArrowRight className="size-4" />
         </Link>
         <button
+          ref={menuButtonRef}
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
+          aria-controls="mobile-navigation"
           onClick={() => setOpen((v) => !v)}
           className="ml-auto rounded-lg p-2 text-foreground transition-colors hover:bg-accent sm:hidden"
         >
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
       </nav>
-      {open && (
-        <div className="border-t border-border bg-background px-5 py-3 sm:hidden">
-          <div className="flex flex-col gap-1">
-            {LINKS.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-base font-medium text-muted-foreground hover:bg-accent data-[status=active]:bg-accent data-[status=active]:text-primary"
-              >
-                {l.label}
-              </Link>
-            ))}
-            <div className="mt-2 grid grid-cols-2 gap-2 border-t border-border pt-3">
-              <Link to="/book" onClick={() => setOpen(false)} className="rounded-xl bg-primary px-3 py-3 text-center text-sm font-bold text-primary-foreground">Book a masterclass</Link>
-              <Link to="/pricing" onClick={() => setOpen(false)} className="rounded-xl border border-border px-3 py-3 text-center text-sm font-bold text-foreground">View pricing</Link>
-            </div>
+      <div
+        id="mobile-navigation"
+        hidden={!open}
+        className="border-t border-border bg-background px-5 py-3 sm:hidden"
+      >
+        <div className="flex flex-col gap-1">
+          {LINKS.map((l) => (
+            <Link
+              key={l.to}
+              to={l.to}
+              onClick={() => setOpen(false)}
+              className="rounded-lg px-3 py-2.5 text-base font-medium text-muted-foreground hover:bg-accent data-[status=active]:bg-accent data-[status=active]:text-primary"
+            >
+              {l.label}
+            </Link>
+          ))}
+          <div className="mt-2 grid grid-cols-2 gap-2 border-t border-border pt-3">
+            <Link
+              to="/book"
+              onClick={() => setOpen(false)}
+              className="rounded-xl bg-primary px-3 py-3 text-center text-sm font-bold text-primary-foreground"
+            >
+              Book a masterclass
+            </Link>
+            <Link
+              to="/pricing"
+              onClick={() => setOpen(false)}
+              className="rounded-xl border border-border px-3 py-3 text-center text-sm font-bold text-foreground"
+            >
+              View pricing
+            </Link>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

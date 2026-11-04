@@ -74,11 +74,7 @@ export const IB_COURSES = [
   "Not sure yet",
 ] as const;
 
-export const IB_LEVELS = [
-  "Standard Level (SL)",
-  "Higher Level (HL)",
-  "Not sure yet",
-] as const;
+export const IB_LEVELS = ["Standard Level (SL)", "Higher Level (HL)", "Not sure yet"] as const;
 
 export const HELP: Record<string, string> = {
   pay: "Totally understandable. The masterclass is the only thing you pay before meeting your tutor, and it is a small one-time launch price. If you would like to talk to us first, message us and we will answer your questions before you pay.",

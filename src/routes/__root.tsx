@@ -77,9 +77,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Fixed Tutor — IIT Maths Tutors for AS, A Level & IB" },
-      { name: "description", content: "One-to-one AS, A Level and IB maths tutoring with a dedicated tutor, capped prices per chapter, and unlimited doubt solving." },
+      {
+        name: "description",
+        content:
+          "One-to-one AS, A Level and IB maths tutoring with a dedicated tutor, capped prices per chapter, and unlimited doubt solving.",
+      },
       { property: "og:title", content: "Fixed Tutor — IIT Maths Tutors for AS, A Level & IB" },
-      { property: "og:description", content: "One dedicated IIT-trained maths tutor, capped chapter prices, and support through the final exam." },
+      {
+        property: "og:description",
+        content:
+          "One dedicated IIT-trained maths tutor, capped chapter prices, and support through the final exam.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -120,8 +128,14 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col">
+        <a
+          href="#main-content"
+          className="sr-only z-50 rounded-md bg-background px-4 py-3 font-semibold text-foreground focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        >
+          Skip to main content
+        </a>
         <SiteNav />
-        <main className="flex-1">
+        <main id="main-content" className="flex-1">
           <Outlet />
         </main>
         <SiteFooter />
