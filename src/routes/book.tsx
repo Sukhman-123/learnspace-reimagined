@@ -85,6 +85,102 @@ function Pill({
   );
 }
 
+function SlotHoldCountdown({ duration }: { duration: number }) {
+  const [seconds, setSeconds] = useState(duration);
+  const [expired, setExpired] = useState(false);
+  const [generation, setGeneration] = useState(0);
+
+  useEffect(() => {
+    let remaining = duration;
+    setSeconds(duration);
+    setExpired(false);
+    const timer = setInterval(() => {
+      remaining = Math.max(0, remaining - 1);
+      setSeconds(remaining);
+      if (remaining === 0) {
+        setExpired(true);
+        clearInterval(timer);
+      }
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [duration, generation]);
+
+  return (
+    <>
+      <div>
+        <p className="flex items-center justify-center gap-1 font-display text-2xl font-extrabold text-primary">
+          <Clock className="size-4" />
+          {fmt(seconds)}
+        </p>
+        <p className="text-xs text-muted-foreground">Your slot is held for</p>
+      </div>
+      {expired && (
+        <p className="col-span-2 rounded-lg bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive">
+          Your hold has ended.{" "}
+          <button
+            type="button"
+            onClick={() => setGeneration((value) => value + 1)}
+            className="underline underline-offset-2"
+          >
+            Hold my slot again
+          </button>
+        </p>
+      )}
+    </>
+  );
+}
+
+function PhoneReservationForm({ onReserve }: { onReserve: (phone: string) => void }) {
+  const [countryCode, setCountryCode] = useState("+44");
+  const [phone, setPhone] = useState("");
+  const phoneDigits = phone.replace(/ /g, "");
+
+  const submit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (phoneDigits.length >= 6) onReserve(`${countryCode} ${phone}`);
+  };
+
+  return (
+    <form onSubmit={submit} className="mt-5">
+      <label className="block text-sm font-semibold" htmlFor="r-phone">
+        Your phone number
+      </label>
+      <div className="mt-1.5 flex gap-2">
+        <select
+          aria-label="Country code"
+          value={countryCode}
+          onChange={(event) => setCountryCode(event.target.value)}
+          className="w-24 shrink-0 rounded-lg border border-input bg-background px-2 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring"
+        >
+          {["+44", "+49", "+33", "+31", "+353", "+41", "+46", "+39", "+34", "+91"].map((code) => (
+            <option key={code}>{code}</option>
+          ))}
+        </select>
+        <input
+          id="r-phone"
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel-national"
+          placeholder="Phone number"
+          value={phone}
+          onChange={(event) => setPhone(event.target.value.replace(/[^0-9 ]/g, ""))}
+          className="min-w-0 flex-1 rounded-lg border border-input bg-background px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring"
+        />
+      </div>
+      <button
+        type="submit"
+        disabled={phoneDigits.length < 6}
+        className="mt-4 w-full rounded-xl bg-primary px-5 py-3 font-display text-base font-bold text-primary-foreground transition-opacity disabled:opacity-40"
+      >
+        Continue
+      </button>
+      <p className="mt-2.5 text-center text-xs text-muted-foreground">
+        We will use your number to confirm your masterclass.
+      </p>
+    </form>
+  );
+}
+
 function BookPage() {
   const { tutor: tutorParam } = Route.useSearch();
   const [step, setStep] = useState(0);
@@ -102,26 +198,10 @@ function BookPage() {
 
   // Phone sheet + slot hold
   const [sheetOpen, setSheetOpen] = useState(false);
-  const [cc, setCc] = useState("+44");
-  const [phone, setPhone] = useState("");
-  const [holdLeft, setHoldLeft] = useState(CONFIG.holdMinutes * 60);
-  const [holdOver, setHoldOver] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, [step]);
-
-  useEffect(() => {
-    if (!sheetOpen) return;
-    setHoldLeft(CONFIG.holdMinutes * 60);
-    setHoldOver(false);
-    const id = setInterval(() => setHoldLeft((s) => Math.max(0, s - 1)), 1000);
-    return () => clearInterval(id);
-  }, [sheetOpen]);
-
-  useEffect(() => {
-    if (holdLeft === 0 && sheetOpen) setHoldOver(true);
-  }, [holdLeft, sheetOpen]);
 
   const setLevel = (lv: string) => {
     setSel((s) => ({
@@ -140,12 +220,8 @@ function BookPage() {
   };
 
   const chosenTutor = TUTORS.find((t) => t.id === chosen) ?? TUTORS[0];
-  const phoneDigits = phone.replace(/ /g, "");
-
-  const reserve = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (phoneDigits.length < 6) return;
-    setForm((f) => ({ ...f, phone: `${cc} ${phone}` }));
+  const reserve = (phone: string) => {
+    setForm((f) => ({ ...f, phone }));
     setSheetOpen(false);
     setStep(1);
   };
@@ -562,7 +638,7 @@ function BookPage() {
 
       {/* Sticky booking bar — step 0 only */}
       {step === 0 && (
-        <div className="fixed inset-x-0 bottom-0 z-30 border-t-2 border-foreground bg-card/95 backdrop-blur">
+        <div className="fixed inset-x-0 bottom-0 z-30 border-t-2 border-foreground bg-card">
           <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-3 px-5 py-3">
             <div>
               <p className="font-display text-2xl font-extrabold leading-none">
@@ -589,10 +665,7 @@ function BookPage() {
       {/* Phone sheet */}
       {sheetOpen && (
         <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
-          <div
-            className="absolute inset-0 bg-foreground/55 backdrop-blur-sm"
-            onClick={() => setSheetOpen(false)}
-          />
+          <div className="absolute inset-0 bg-foreground/55" onClick={() => setSheetOpen(false)} />
           <div
             role="dialog"
             aria-modal="true"
@@ -618,70 +691,9 @@ function BookPage() {
                 </p>
                 <p className="text-xs text-muted-foreground">Slots left this week</p>
               </div>
-              <div>
-                <p className="flex items-center justify-center gap-1 font-display text-2xl font-extrabold text-primary">
-                  <Clock className="size-4" />
-                  {fmt(holdLeft)}
-                </p>
-                <p className="text-xs text-muted-foreground">Your slot is held for</p>
-              </div>
+              <SlotHoldCountdown duration={CONFIG.holdMinutes * 60} />
             </div>
-
-            {holdOver && (
-              <p className="mt-3 rounded-lg bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive">
-                Your hold has ended.{" "}
-                <button
-                  type="button"
-                  onClick={() => {
-                    setHoldLeft(CONFIG.holdMinutes * 60);
-                    setHoldOver(false);
-                  }}
-                  className="underline underline-offset-2"
-                >
-                  Hold my slot again
-                </button>
-              </p>
-            )}
-
-            <form onSubmit={reserve} className="mt-5">
-              <label className="block text-sm font-semibold" htmlFor="r-phone">
-                Your phone number
-              </label>
-              <div className="mt-1.5 flex gap-2">
-                <select
-                  aria-label="Country code"
-                  value={cc}
-                  onChange={(e) => setCc(e.target.value)}
-                  className="w-24 shrink-0 rounded-lg border border-input bg-background px-2 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring"
-                >
-                  {["+44", "+49", "+33", "+31", "+353", "+41", "+46", "+39", "+34", "+91"].map(
-                    (c) => (
-                      <option key={c}>{c}</option>
-                    ),
-                  )}
-                </select>
-                <input
-                  id="r-phone"
-                  type="tel"
-                  inputMode="tel"
-                  autoComplete="tel-national"
-                  placeholder="Phone number"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value.replace(/[^0-9 ]/g, ""))}
-                  className="min-w-0 flex-1 rounded-lg border border-input bg-background px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring"
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={phoneDigits.length < 6}
-                className="mt-4 w-full rounded-xl bg-primary px-5 py-3 font-display text-base font-bold text-primary-foreground transition-opacity disabled:opacity-40"
-              >
-                Continue
-              </button>
-              <p className="mt-2.5 text-center text-xs text-muted-foreground">
-                We will use your number to confirm your masterclass.
-              </p>
-            </form>
+            <PhoneReservationForm onReserve={reserve} />
           </div>
         </div>
       )}
