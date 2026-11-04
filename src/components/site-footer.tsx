@@ -9,8 +9,8 @@ export function SiteFooter() {
         <div>
           <Logo light />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-primary-foreground/80">
-            One-to-one AS, A Level and IB maths tutoring. One dedicated tutor from the
-            first question to the final exam.
+            We don’t sell hours, we deliver results. One-to-one AS, A Level & IB maths
+            for Indian families in Europe.
           </p>
         </div>
         <div>
@@ -25,12 +25,7 @@ export function SiteFooter() {
             </li>
             <li>
               <Link to="/tutors" className="text-primary-foreground/85 hover:text-gold">
-                Meet your tutor
-              </Link>
-            </li>
-            <li>
-              <Link to="/dashboard" className="text-primary-foreground/85 hover:text-gold">
-                Family learning hub
+                Meet the tutors
               </Link>
             </li>
             <li>
@@ -64,7 +59,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-primary-foreground/15 py-5 text-center text-xs text-primary-foreground/60">
-        © {new Date().getFullYear()} Fixed Tutor · One dedicated maths tutor
+        © {new Date().getFullYear()} Fixed Tutor · Every tutor studied at an IIT
       </div>
     </footer>
   );

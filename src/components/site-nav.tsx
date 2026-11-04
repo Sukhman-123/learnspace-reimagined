@@ -1,12 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const LINKS = [
   { to: "/", label: "Home" },
-  { to: "/tutors", label: "Our tutors" },
+  { to: "/tutors", label: "Tutors" },
   { to: "/pricing", label: "Pricing" },
-  { to: "/dashboard", label: "Family hub" },
 ] as const;
 
 export function Logo({ light }: { light?: boolean }) {
@@ -30,11 +29,11 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
 
   const linkCls =
-    "rounded-lg px-3 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-accent/70 hover:text-primary data-[status=active]:text-primary";
+    "rounded-lg px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground data-[status=active]:bg-accent data-[status=active]:font-semibold data-[status=active]:text-primary";
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/70 bg-background/90 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-3 sm:px-5 sm:py-3.5">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
+      <nav className="mx-auto flex max-w-6xl items-center gap-2 px-5 py-3">
         <Logo />
         <div className="ml-auto hidden items-center gap-1 sm:flex">
           {LINKS.map((l) => (
@@ -45,9 +44,9 @@ export function SiteNav() {
         </div>
         <Link
           to="/book"
-          className="ml-2 hidden items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-primary-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md sm:inline-flex"
+          className="ml-2 hidden rounded-xl bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-transform hover:-translate-y-0.5 sm:inline-block"
         >
-          Book a masterclass <ArrowRight className="size-4" />
+          Book a masterclass
         </Link>
         <button
           type="button"
@@ -72,10 +71,13 @@ export function SiteNav() {
                 {l.label}
               </Link>
             ))}
-            <div className="mt-2 grid grid-cols-2 gap-2 border-t border-border pt-3">
-              <Link to="/book" onClick={() => setOpen(false)} className="rounded-xl bg-primary px-3 py-3 text-center text-sm font-bold text-primary-foreground">Book a masterclass</Link>
-              <Link to="/pricing" onClick={() => setOpen(false)} className="rounded-xl border border-border px-3 py-3 text-center text-sm font-bold text-foreground">View pricing</Link>
-            </div>
+            <Link
+              to="/book"
+              onClick={() => setOpen(false)}
+              className="mt-1 rounded-xl bg-primary px-4 py-2.5 text-center text-sm font-bold text-primary-foreground"
+            >
+              Book a masterclass
+            </Link>
           </div>
         </div>
       )}

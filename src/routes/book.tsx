@@ -25,7 +25,7 @@ export const Route = createFileRoute("/book")({
       {
         name: "description",
         content:
-          "Reserve a €10 one-to-one masterclass with your dedicated IIT-trained maths tutor. Choose your level and exam board in three steps.",
+          "Reserve a €10 one-to-one masterclass with an IIT-trained maths tutor. Choose your level, exam board and tutor in three steps.",
       },
       { property: "og:title", content: "Book a Masterclass — Fixed Tutor" },
       {
@@ -39,7 +39,7 @@ export const Route = createFileRoute("/book")({
   }),
 });
 
-const STEPS = ["Choose course", "Your details", "Pay", "Pick a time"];
+const STEPS = ["Choose tutor", "Your details", "Pay", "Pick a time"];
 const BOARD_OPTIONS = ["Edexcel", "AQA", "OCR", "IB", "Not sure yet"];
 
 type Form = {
@@ -279,8 +279,14 @@ function BookPage() {
                 </div>
               )}
 
-              <h2 className="mt-7 font-display text-lg font-bold">Your dedicated tutor</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">You’ll work one-to-one with the same tutor throughout your learning plan.</p>
+              <h2 className="mt-7 font-display text-lg font-bold">Choose your tutor</h2>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {TUTORS.map((t) => (
+                  <Pill key={t.id} on={chosen === t.id} onClick={() => setChosen(t.id)}>
+                    {t.name.split(" ")[0]} · {t.college.split(",")[0]}
+                  </Pill>
+                ))}
+              </div>
             </div>
 
             <aside className="h-fit rounded-2xl border-2 border-foreground bg-card p-6 lg:sticky lg:top-24 hard-shadow">

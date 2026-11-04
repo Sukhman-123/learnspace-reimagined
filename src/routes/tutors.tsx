@@ -1,56 +1,122 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Award, BookOpen, Check, GraduationCap, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { useState } from "react";
 import { Reveal } from "@/components/reveal";
 import { BOARDS, TUTORS, initials } from "@/data/site";
 
 export const Route = createFileRoute("/tutors")({
-  component: TutorPage,
+  component: TutorsPage,
   head: () => ({
     meta: [
-      { title: "Your Maths Tutor | Fixed Tutor" },
-      { name: "description", content: "Meet your dedicated IIT-trained maths tutor for AS, A Level and IB. One tutor, a plan built around your goals, and support through exam day." },
+      { title: "Meet the Tutors — IIT-Trained Maths Tutors | Fixed Tutor" },
+      {
+        name: "description",
+        content:
+          "Four IIT-trained maths tutors covering Edexcel, AQA, OCR and IB. Book a masterclass with the one that fits, then keep them until your exams.",
+      },
+      {
+        property: "og:title",
+        content: "Meet the Tutors — IIT-Trained Maths Tutors | Fixed Tutor",
+      },
+      {
+        property: "og:description",
+        content:
+          "Four IIT-trained maths tutors covering Edexcel, AQA, OCR and IB. Book a masterclass with the one that fits.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
 });
 
-function TutorPage() {
-  const tutor = TUTORS[0];
+function TutorsPage() {
+  const [board, setBoard] = useState<string>("All");
+  const filtered =
+    board === "All" ? TUTORS : TUTORS.filter((t) => t.boards.includes(board));
+
   return (
-    <section className="hero-wash min-h-[70vh] py-12 sm:py-16">
+    <section className="paper-grid min-h-[70vh] py-16">
       <div className="mx-auto max-w-6xl px-5">
         <Reveal>
-          <p className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-2 text-sm font-bold text-primary"><Sparkles className="size-4" /> One student. One dedicated tutor.</p>
-          <div className="mt-8 grid items-center gap-10 lg:grid-cols-[.85fr_1.15fr] lg:gap-16">
-            <div className="relative mx-auto grid aspect-square w-full max-w-sm place-items-center overflow-hidden rounded-[2rem] bg-primary shadow-2xl shadow-primary/20">
-              <div className="absolute inset-5 rounded-[1.5rem] border border-white/20" />
-              <div className="relative grid size-36 place-items-center rounded-full bg-white/15 font-display text-5xl font-extrabold text-white ring-8 ring-white/10">{initials(tutor.name)}</div>
-              <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white p-4 shadow-lg">
-                <p className="flex items-center gap-2 text-sm font-bold text-primary"><Award className="size-4" /> {tutor.college}</p>
-                <p className="mt-1 text-xs text-muted-foreground">{tutor.exp} of teaching experience</p>
-              </div>
-            </div>
-            <div>
-              <p className="text-sm font-bold uppercase tracking-[.16em] text-primary">Your dedicated maths tutor</p>
-              <h1 className="mt-3 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">Meet {tutor.name}</h1>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">{tutor.bio} Lessons are shaped around your current level, exam board, and the topics you want to master. You keep the same tutor throughout your journey.</p>
-              <div className="mt-6 flex flex-wrap gap-2" aria-label="Exam boards covered">
-                {BOARDS.map((board) => <span key={board} className="rounded-full bg-white px-3 py-1.5 text-sm font-semibold text-primary shadow-sm">{board}</span>)}
-              </div>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {[
-                  [GraduationCap, "AS, A Level & IB Maths"],
-                  [BookOpen, `${tutor.focus.join(" & ")} specialisms`],
-                  [Check, "Lessons shaped to your goals"],
-                  [Sparkles, "Support between lessons too"],
-                ].map(([Icon, label]) => {
-                  const ItemIcon = Icon as typeof GraduationCap;
-                  return <div key={label as string} className="flex items-center gap-2.5 rounded-xl border border-primary/10 bg-white/80 p-3 text-sm font-semibold"><ItemIcon className="size-4 shrink-0 text-primary" />{label as string}</div>;
-                })}
-              </div>
-              <Link to="/book" search={{ tutor: tutor.id }} className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-display font-bold text-primary-foreground shadow-lg shadow-primary/20 transition hover:-translate-y-0.5">Meet your tutor <ArrowRight className="size-4" /></Link>
-            </div>
+          <h1 className="font-display text-4xl font-extrabold sm:text-5xl">
+            Choose your <span className="highlight">tutor</span>
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
+            We cover Edexcel, AQA, OCR and IB. Each card shows the boards that tutor
+            teaches. Book a masterclass with the one that fits, then keep them until your
+            exams.
+          </p>
+        </Reveal>
+
+        <Reveal delay={100}>
+          <div className="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filter by exam board">
+            {(["All", ...BOARDS] as const).map((b) => (
+              <button
+                key={b}
+                type="button"
+                aria-pressed={board === b}
+                onClick={() => setBoard(b)}
+                className={`rounded-full border-2 px-4 py-2 text-sm font-semibold transition-all ${
+                  board === b
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border bg-card text-foreground hover:border-primary/50"
+                }`}
+              >
+                {b}
+              </button>
+            ))}
           </div>
         </Reveal>
+
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {filtered.map((t, i) => (
+            <Reveal key={t.id} delay={i * 80}>
+              <article className="flex h-full flex-col rounded-2xl border-2 border-foreground bg-card p-6 hard-shadow">
+                <div className="flex items-center gap-4">
+                  <div className="grid size-14 shrink-0 place-items-center rounded-full bg-primary font-display text-lg font-extrabold text-primary-foreground">
+                    {initials(t.name)}
+                  </div>
+                  <div>
+                    <h2 className="font-display text-xl font-bold">{t.name}</h2>
+                    <p className="text-sm text-muted-foreground">{t.college}</p>
+                  </div>
+                </div>
+                <p className="mt-4 leading-relaxed text-muted-foreground">{t.bio}</p>
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {t.levels.map((l) => (
+                    <span
+                      key={l}
+                      className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground"
+                    >
+                      {l}
+                    </span>
+                  ))}
+                  {t.focus.map((f) => (
+                    <span
+                      key={f}
+                      className="rounded-full bg-gold-soft px-2.5 py-0.5 text-xs font-semibold text-gold-foreground"
+                    >
+                      {f}
+                    </span>
+                  ))}
+                </div>
+                <p className="mt-4 text-sm text-muted-foreground">
+                  {t.exp} teaching · {t.boards.join(", ")}
+                </p>
+                <div className="mt-auto pt-5">
+                  <Link
+                    to="/book"
+                    search={{ tutor: t.id }}
+                    className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-0.5 hover:hard-shadow"
+                  >
+                    Book masterclass with {t.name.split(" ")[0]}
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

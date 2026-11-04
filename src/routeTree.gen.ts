@@ -13,7 +13,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BookRouteImport } from './routes/book'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as TutorsRouteImport } from './routes/tutors'
-import { Route as DashboardRouteImport } from './routes/dashboard'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -35,25 +34,18 @@ const TutorsRoute = TutorsRouteImport.update({
   path: '/tutors',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/book': typeof BookRoute
   '/pricing': typeof PricingRoute
   '/tutors': typeof TutorsRoute
-  '/dashboard': typeof DashboardRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/book': typeof BookRoute
   '/pricing': typeof PricingRoute
   '/tutors': typeof TutorsRoute
-  '/dashboard': typeof DashboardRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -61,14 +53,13 @@ export interface FileRoutesById {
   '/book': typeof BookRoute
   '/pricing': typeof PricingRoute
   '/tutors': typeof TutorsRoute
-  '/dashboard': typeof DashboardRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/book' | '/pricing' | '/tutors' | '/dashboard'
+  fullPaths: '/' | '/book' | '/pricing' | '/tutors'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/book' | '/pricing' | '/tutors' | '/dashboard'
-  id: '__root__' | '/' | '/book' | '/pricing' | '/tutors' | '/dashboard'
+  to: '/' | '/book' | '/pricing' | '/tutors'
+  id: '__root__' | '/' | '/book' | '/pricing' | '/tutors'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,7 +67,6 @@ export interface RootRouteChildren {
   BookRoute: typeof BookRoute
   PricingRoute: typeof PricingRoute
   TutorsRoute: typeof TutorsRoute
-  DashboardRoute: typeof DashboardRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -109,13 +99,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TutorsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -124,7 +107,6 @@ const rootRouteChildren: RootRouteChildren = {
   BookRoute: BookRoute,
   PricingRoute: PricingRoute,
   TutorsRoute: TutorsRoute,
-  DashboardRoute: DashboardRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

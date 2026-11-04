@@ -56,29 +56,29 @@
 
 :root {
   --radius: 0.75rem;
-  --background: oklch(0.985 0.006 250);
-  --foreground: oklch(0.25 0.045 264);
+  --background: oklch(0.982 0.006 95);
+  --foreground: oklch(0.27 0.055 264);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.27 0.055 264);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.27 0.055 264);
-  --primary: oklch(0.39 0.12 274);
+  --primary: oklch(0.35 0.11 268);
   --primary-foreground: oklch(0.985 0.004 95);
-  --secondary: oklch(0.96 0.018 250);
-  --secondary-foreground: oklch(0.39 0.12 274);
-  --muted: oklch(0.96 0.012 250);
-  --muted-foreground: oklch(0.52 0.035 265);
-  --accent: oklch(0.95 0.035 160);
+  --secondary: oklch(0.955 0.01 95);
+  --secondary-foreground: oklch(0.35 0.11 268);
+  --muted: oklch(0.955 0.008 265);
+  --muted-foreground: oklch(0.55 0.045 265);
+  --accent: oklch(0.945 0.045 95);
   --accent-foreground: oklch(0.35 0.11 268);
   --destructive: oklch(0.55 0.2 27);
   --destructive-foreground: oklch(0.985 0.004 95);
-  --gold: oklch(0.87 0.15 88);
+  --gold: oklch(0.84 0.17 90);
   --gold-foreground: oklch(0.27 0.055 264);
-  --gold-soft: oklch(0.96 0.045 95);
+  --gold-soft: oklch(0.945 0.055 95);
   --success: oklch(0.55 0.12 160);
   --warn: oklch(0.5 0.19 25);
-  --border: oklch(0.91 0.018 260);
-  --input: oklch(0.91 0.018 260);
+  --border: oklch(0.905 0.014 265);
+  --input: oklch(0.905 0.014 265);
   --ring: oklch(0.84 0.17 90);
   --grid: oklch(0.93 0.018 265);
   --grid-line: oklch(0.88 0.02 265);
@@ -89,16 +89,9 @@
     border-color: var(--color-border);
   }
 
-  :focus-visible {
-    outline: 3px solid var(--color-primary);
-    outline-offset: 3px;
-  }
-
   body {
     @apply bg-background font-sans text-foreground antialiased;
   }
-
-  html { scroll-behavior: smooth; }
 
   h1,
   h2,
@@ -112,27 +105,6 @@
     background: var(--gold);
     color: var(--gold-foreground);
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-@utility hero-wash {
-  background: radial-gradient(ellipse at 78% 42%, oklch(0.93 0.045 165 / 55%), transparent 38%),
-    radial-gradient(ellipse at 5% 10%, oklch(0.94 0.045 88 / 45%), transparent 34%),
-    linear-gradient(135deg, oklch(0.985 0.006 250), oklch(0.97 0.025 250));
-}
-
-@utility hero-highlight {
-  color: var(--color-primary);
-  background-image: linear-gradient(transparent 67%, oklch(0.86 0.14 88 / 88%) 67%);
-  background-repeat: no-repeat;
 }
 
 /* Graph-paper background */
