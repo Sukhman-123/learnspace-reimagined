@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
+import logoImage from "@/assets/fixed-tutor-logo.png";
 
 const LINKS = [
   { to: "/", label: "Home" },
@@ -11,17 +12,18 @@ const LINKS = [
 
 export function Logo({ light }: { light?: boolean }) {
   return (
-    <Link to="/" className="flex items-baseline gap-1" aria-label="Fixed Tutor home">
-      <span
-        className={`font-display text-xl font-extrabold tracking-tight ${
-          light ? "text-primary-foreground" : "text-primary"
-        }`}
-      >
-        Fixed
-      </span>
-      <span className="rounded-md bg-gold px-1.5 font-display text-xl font-extrabold tracking-tight text-gold-foreground">
-        Tutor
-      </span>
+    <Link
+      to="/"
+      className={`inline-flex shrink-0 overflow-hidden rounded-xl ${light ? "bg-background p-1.5" : ""}`}
+      aria-label="Fixed Tutor home"
+    >
+      <img
+        src={logoImage}
+        alt=""
+        width={974}
+        height={300}
+        className="block h-auto w-[136px] sm:w-[174px]"
+      />
     </Link>
   );
 }
