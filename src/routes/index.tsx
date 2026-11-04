@@ -2,8 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   CalendarClock,
+  Check,
+  ChevronRight,
   GraduationCap,
   MessagesSquare,
+  Star,
   UserCheck,
   Wallet,
 } from "lucide-react";
@@ -21,7 +24,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "One-to-one AS, A Level and IB maths tutoring for Indian families in Europe. Pick your IIT-trained tutor, keep them until the final exam, and ask doubts as often as you like.",
+          "One-to-one AS, A Level and IB maths tutoring with one dedicated IIT-trained tutor, capped chapter prices, and support through exam day.",
       },
       {
         property: "og:title",
@@ -30,7 +33,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Fixed tutors, capped prices per chapter, unlimited doubt solving. Book a €10 masterclass.",
+          "One dedicated maths tutor, capped prices per chapter, unlimited doubt solving. Book a €10 masterclass.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -42,74 +45,85 @@ function Index() {
   return (
     <>
       {/* Hero */}
-      <section className="paper-grid border-b border-border">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-28 pt-14 lg:grid-cols-[1.05fr_1fr] lg:pb-32 lg:pt-20">
-          <div>
-            <span className="inline-block -rotate-1 rounded-lg bg-gold px-3 py-1.5 font-display text-sm font-bold text-gold-foreground shadow-note">
-              We don’t sell hours. We deliver results.
-            </span>
-            <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-[3.6rem]">
-              An <span className="highlight">IIT mathematician</span> for your child’s A
-              Level or IB maths.
+      <section className="hero-wash relative overflow-hidden">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-20 pt-12 sm:pb-24 sm:pt-16 lg:grid-cols-[1.02fr_.98fr] lg:gap-14 lg:pb-28 lg:pt-20">
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/10 bg-white/80 px-3.5 py-2 text-xs font-bold text-primary shadow-sm sm:text-sm">
+              <span className="grid size-6 place-items-center rounded-full bg-gold-soft text-primary"><Star className="size-3.5 fill-current" /></span>
+              Personal tutoring, built around your child
+            </div>
+            <h1 className="mt-6 max-w-2xl font-display text-[2.65rem] font-extrabold leading-[1.04] tracking-[-.045em] sm:text-6xl lg:text-[4.15rem]">
+              Big goals need a <span className="hero-highlight">better way</span> to learn.
             </h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              One-to-one AS, A Level and IB maths tutoring for Indian families in Europe.
-              Pick your tutor, keep them until the final exam, and ask doubts as often as
-              you like.
+            <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
+              One-to-one AS, A Level and IB maths tutoring with an IIT-trained tutor who stays with your child from the first question to the final exam.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/book"
-                className="group inline-flex items-center gap-2 rounded-xl bg-gold px-6 py-3.5 font-display text-base font-bold text-gold-foreground transition-transform hover:-translate-y-0.5 hard-shadow"
+                className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-display text-base font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 hover:shadow-xl"
               >
-                Book a masterclass
+                Find your tutor
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/tutors"
-                className="inline-flex items-center gap-2 rounded-xl border-2 border-foreground bg-card px-6 py-3.5 font-display text-base font-bold text-foreground transition-colors hover:bg-accent"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-white/80 px-6 py-3.5 font-display text-base font-bold text-foreground transition-colors hover:bg-white"
               >
-                Meet the tutors
+                Explore our tutors
               </Link>
             </div>
-            <div className="mt-8 flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground">
+            <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-muted-foreground sm:text-sm">
+              {["No rotating tutors", "No surprise bills", "Doubts answered anytime"].map((item) => <span key={item} className="inline-flex items-center gap-1.5"><Check className="size-4 text-success" />{item}</span>)}
+            </div>
+            <div className="mt-8 flex flex-wrap items-center gap-2 border-t border-primary/10 pt-5 text-[11px] font-semibold text-muted-foreground sm:text-xs">
               {BOARDS.map((b) => (
                 <span
                   key={b}
-                  className="rounded-full border border-border bg-card px-3 py-1"
+                  className="rounded-full bg-white/75 px-3 py-1.5"
                 >
                   {b}
                 </span>
               ))}
-              <span className="rounded-full border border-border bg-card px-3 py-1">
+                <span className="rounded-full bg-white/75 px-3 py-1.5">
                 IB AA & AI
               </span>
-              <span className="rounded-full border border-border bg-card px-3 py-1">
+                <span className="rounded-full bg-white/75 px-3 py-1.5">
                 UK / CET evening slots
               </span>
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative mx-auto w-full max-w-xl lg:ml-auto">
+            <div className="absolute -inset-3 rounded-[2rem] bg-primary/5 sm:-inset-5" />
             <img
               src={heroImg}
               width={1408}
               height={1024}
               alt="A student studying maths with calculus formulas floating around"
-              className="w-full rounded-2xl border-2 border-foreground hard-shadow"
+              className="relative aspect-[1.22] w-full rounded-[1.5rem] object-cover shadow-2xl shadow-primary/15 sm:rounded-[2rem]"
             />
-            <div className="absolute -bottom-14 left-4 right-8 max-w-sm -rotate-2 rounded-xl border-2 border-foreground bg-card p-4 hard-shadow sm:left-8">
-              <p className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-                <CalendarClock className="size-3.5" />
-                Doubt, 11:48 pm
-              </p>
-              <p className="mt-2 text-sm font-semibold leading-relaxed">
-                Why does ∫ 1/x dx give ln|x| and not ln x ?
-              </p>
-              <p className="mt-2.5 border-t border-dashed border-border pt-2.5 text-sm font-bold text-success">
-                Your tutor replies. No clock running.
-              </p>
+            <div className="absolute -bottom-6 left-3 right-3 rounded-2xl border border-white/70 bg-white/95 p-4 shadow-xl shadow-primary/10 sm:-bottom-8 sm:left-8 sm:right-auto sm:w-[min(22rem,calc(100%-2rem))] sm:p-5">
+              <p className="flex items-center gap-2 text-xs font-bold text-primary"><span className="grid size-7 place-items-center rounded-lg bg-gold-soft"><CalendarClock className="size-4" /></span> A real question. A real tutor.</p>
+              <p className="mt-2 text-sm font-semibold leading-relaxed sm:text-base">“Why does ∫ 1/x dx give ln|x| and not ln x?”</p>
+              <p className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-success"><Check className="size-3.5" /> Answered with care, whenever it comes up</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-white">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-5 px-5 py-6 sm:grid-cols-4 sm:gap-8 sm:py-8">
+          {[{ value: "1:1", label: "Personal lessons" }, { value: "IIT", label: "Expert tutor" }, { value: "100%", label: "Focused on progress" }, { value: "∞", label: "Doubts welcome" }].map((item) => <div key={item.label} className="text-center"><p className="font-display text-2xl font-extrabold tracking-tight text-primary sm:text-3xl">{item.value}</p><p className="mt-1 text-[11px] font-semibold text-muted-foreground sm:text-sm">{item.label}</p></div>)}
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <Reveal><div className="mx-auto max-w-2xl text-center"><p className="text-sm font-bold uppercase tracking-[.16em] text-primary">A calmer way to make progress</p><h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">For students and the people cheering them on</h2><p className="mt-3 text-muted-foreground">The same learning plan works for the student doing the work and the parent supporting the journey.</p></div></Reveal>
+          <div className="mt-9 grid gap-4 md:grid-cols-2">
+            <Reveal><Link to="/tutors" className="group flex h-full flex-col rounded-3xl border border-border bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl sm:p-8"><span className="grid size-12 place-items-center rounded-2xl bg-gold-soft text-primary"><GraduationCap className="size-6" /></span><h3 className="mt-5 font-display text-2xl font-extrabold">I’m a student</h3><p className="mt-2 max-w-lg leading-relaxed text-muted-foreground">Get clear explanations, ask every question, and build a plan for the maths exams you’re working toward.</p><span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">Meet your tutor <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" /></span></Link></Reveal>
+            <Reveal delay={100}><Link to="/dashboard" className="group flex h-full flex-col rounded-3xl border border-primary/10 bg-accent/60 p-6 transition hover:-translate-y-1 hover:shadow-xl sm:p-8"><span className="grid size-12 place-items-center rounded-2xl bg-white text-primary"><UserCheck className="size-6" /></span><h3 className="mt-5 font-display text-2xl font-extrabold">I’m a parent</h3><p className="mt-2 max-w-lg leading-relaxed text-muted-foreground">See how the family learning hub brings upcoming lessons, progress, and tutor notes together.</p><span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-primary">Preview the family hub <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" /></span></Link></Reveal>
           </div>
         </div>
       </section>
@@ -126,8 +140,8 @@ function Index() {
             {[
               {
                 icon: GraduationCap,
-                title: "IIT-trained tutors",
-                text: "Every tutor studied at an IIT, so the maths is deep and the shortcuts are sharp.",
+                title: "IIT-trained tutor",
+                text: "Learn with a maths specialist trained at an IIT, with clear explanations and practical exam technique.",
               },
               {
                 icon: UserCheck,
@@ -208,6 +222,19 @@ function Index() {
                 </div>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <Reveal><div className="max-w-2xl"><p className="text-sm font-bold uppercase tracking-[.16em] text-primary">Your learning journey</p><h2 className="mt-3 font-display text-3xl font-extrabold sm:text-4xl">A clear path from first chat to exam day</h2><p className="mt-3 leading-relaxed text-muted-foreground">A familiar face, a focused plan, and steady progress at every step.</p></div></Reveal>
+          <div className="mt-9 grid gap-4 md:grid-cols-3">
+            {[
+              { n: "01", title: "Meet your tutor", text: "Talk through your goals, exam board, and the topics that feel tricky right now." },
+              { n: "02", title: "Build your plan", text: "Your tutor maps out the chapters and skills to focus on, at a pace that works for you." },
+              { n: "03", title: "Learn with confidence", text: "Work through each idea together, check your understanding, and keep moving toward your exams." },
+            ].map((item, i) => <Reveal key={item.n} delay={i * 90}><article className="h-full rounded-2xl border border-border bg-card p-6 sm:p-7"><span className="font-display text-sm font-extrabold text-primary">STEP {item.n}</span><h3 className="mt-4 font-display text-xl font-bold">{item.title}</h3><p className="mt-2 leading-relaxed text-muted-foreground">{item.text}</p></article></Reveal>)}
           </div>
         </div>
       </section>

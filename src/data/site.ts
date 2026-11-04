@@ -36,36 +36,6 @@ export const TUTORS: Tutor[] = [
     focus: ["Pure", "Mechanics"],
     bio: "Breaks calculus and mechanics into patterns you can reuse in the exam.",
   },
-  {
-    id: "t2",
-    name: "Neha Iyer",
-    college: "IIT Madras, M.Sc Maths",
-    exp: "7 years",
-    boards: ["Edexcel", "OCR", "IB"],
-    levels: ["AS", "A2", "IB"],
-    focus: ["Pure", "Statistics"],
-    bio: "Patient with nervous starters; strong on proof, sequences and hypothesis testing.",
-  },
-  {
-    id: "t3",
-    name: "Rohan Kulkarni",
-    college: "IIT Kanpur, B.Tech",
-    exp: "11 years",
-    boards: ["AQA", "Edexcel", "IB"],
-    levels: ["A2", "IB"],
-    focus: ["Pure", "Mechanics", "Statistics"],
-    bio: "Exam-technique specialist for students targeting A* and top university offers.",
-  },
-  {
-    id: "t4",
-    name: "Ishita Rao",
-    college: "IIT Delhi, B.Tech",
-    exp: "6 years",
-    boards: ["OCR", "AQA", "Edexcel"],
-    levels: ["AS"],
-    focus: ["Pure", "Statistics"],
-    bio: "Builds confidence early so AS grades set up a strong A2 year.",
-  },
 ];
 
 export const TESTIMONIALS = [
