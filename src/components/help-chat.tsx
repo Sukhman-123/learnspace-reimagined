@@ -20,12 +20,16 @@ export function HelpChat() {
   }, [msgs, open]);
 
   const reply = (key: string) => {
-    const text = HELP[key] ?? HELP.hum;
-    const link =
+    const text = HELP[key] ?? HELP["hum"] ?? "Happy to help personally. Reach us here:";
+    const msg: Msg =
       key === "pay" || key === "hum"
-        ? { href: `mailto:${CONFIG.email}`, label: CONFIG.email }
-        : undefined;
-    setMsgs((m) => [...m, { text, from: "bot", link }]);
+        ? {
+            text,
+            from: "bot",
+            link: { href: `mailto:${CONFIG.email}`, label: CONFIG.email },
+          }
+        : { text, from: "bot" };
+    setMsgs((m) => [...m, msg]);
   };
 
   const askTopic = (key: string, label: string) => {
