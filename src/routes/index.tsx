@@ -1,24 +1,310 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  ArrowRight,
+  CalendarClock,
+  GraduationCap,
+  MessagesSquare,
+  UserCheck,
+  Wallet,
+} from "lucide-react";
+import heroImg from "@/assets/hero-illustration.png";
+import { Reveal } from "@/components/reveal";
+import { BOARDS, CONFIG, TESTIMONIALS } from "@/data/site";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      {
+        title: "Fixed Tutor — An IIT Mathematician for Your Child’s A Level & IB Maths",
+      },
+      {
+        name: "description",
+        content:
+          "One-to-one AS, A Level and IB maths tutoring for Indian families in Europe. Pick your IIT-trained tutor, keep them until the final exam, and ask doubts as often as you like.",
+      },
+      {
+        property: "og:title",
+        content: "Fixed Tutor — An IIT Mathematician for Your Child’s A Level & IB Maths",
+      },
+      {
+        property: "og:description",
+        content:
+          "Fixed tutors, capped prices per chapter, unlimited doubt solving. Book a €10 masterclass.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      {/* Hero */}
+      <section className="paper-grid border-b border-border">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-28 pt-14 lg:grid-cols-[1.05fr_1fr] lg:pb-32 lg:pt-20">
+          <div>
+            <span className="inline-block -rotate-1 rounded-lg bg-gold px-3 py-1.5 font-display text-sm font-bold text-gold-foreground shadow-note">
+              We don’t sell hours. We deliver results.
+            </span>
+            <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-[3.6rem]">
+              An <span className="highlight">IIT mathematician</span> for your child’s A
+              Level or IB maths.
+            </h1>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
+              One-to-one AS, A Level and IB maths tutoring for Indian families in Europe.
+              Pick your tutor, keep them until the final exam, and ask doubts as often as
+              you like.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                to="/book"
+                className="group inline-flex items-center gap-2 rounded-xl bg-gold px-6 py-3.5 font-display text-base font-bold text-gold-foreground transition-transform hover:-translate-y-0.5 hard-shadow"
+              >
+                Book a masterclass
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <Link
+                to="/tutors"
+                className="inline-flex items-center gap-2 rounded-xl border-2 border-foreground bg-card px-6 py-3.5 font-display text-base font-bold text-foreground transition-colors hover:bg-accent"
+              >
+                Meet the tutors
+              </Link>
+            </div>
+            <div className="mt-8 flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground">
+              {BOARDS.map((b) => (
+                <span
+                  key={b}
+                  className="rounded-full border border-border bg-card px-3 py-1"
+                >
+                  {b}
+                </span>
+              ))}
+              <span className="rounded-full border border-border bg-card px-3 py-1">
+                IB AA & AI
+              </span>
+              <span className="rounded-full border border-border bg-card px-3 py-1">
+                UK / CET evening slots
+              </span>
+            </div>
+          </div>
+
+          <div className="relative">
+            <img
+              src={heroImg}
+              width={1408}
+              height={1024}
+              alt="A student studying maths with calculus formulas floating around"
+              className="w-full rounded-2xl border-2 border-foreground hard-shadow"
+            />
+            <div className="absolute -bottom-14 left-4 right-8 max-w-sm -rotate-2 rounded-xl border-2 border-foreground bg-card p-4 hard-shadow sm:left-8">
+              <p className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
+                <CalendarClock className="size-3.5" />
+                Doubt, 11:48 pm
+              </p>
+              <p className="mt-2 text-sm font-semibold leading-relaxed">
+                Why does ∫ 1/x dx give ln|x| and not ln x ?
+              </p>
+              <p className="mt-2.5 border-t border-dashed border-border pt-2.5 text-sm font-bold text-success">
+                Your tutor replies. No clock running.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why families choose */}
+      <section className="py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <Reveal>
+            <h2 className="text-center font-display text-3xl font-extrabold sm:text-4xl">
+              Why families choose <span className="highlight">Fixed Tutor</span>
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                icon: GraduationCap,
+                title: "IIT-trained tutors",
+                text: "Every tutor studied at an IIT, so the maths is deep and the shortcuts are sharp.",
+              },
+              {
+                icon: UserCheck,
+                title: "Fixed tutor: yours till the exam",
+                text: "Choose one tutor after the masterclass and stay with them to the final paper. No rotating teachers.",
+                fx: true,
+              },
+              {
+                icon: Wallet,
+                title: "Fixed price: capped per chapter",
+                text: "Each chapter has a maximum price. Take the extra sessions you need without the bill growing.",
+                fx: true,
+              },
+              {
+                icon: MessagesSquare,
+                title: "Unlimited doubt solving",
+                text: "Send questions between lessons. Nobody is watching the clock, so students ask more.",
+              },
+            ].map((c, i) => (
+              <Reveal key={c.title} delay={i * 90}>
+                <div className="h-full rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/40 hover:hard-shadow">
+                  <div className="grid size-11 place-items-center rounded-xl bg-gold-soft text-primary">
+                    <c.icon className="size-5" />
+                  </div>
+                  <h3 className="mt-4 font-display text-lg font-bold">
+                    {c.fx ? (
+                      <>
+                        <span className="highlight font-extrabold">{c.title.split(":")[0]}</span>
+                        {c.title.slice(c.title.indexOf(":"))}
+                      </>
+                    ) : (
+                      c.title
+                    )}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.text}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Three things we fix */}
+      <section className="bg-secondary py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <Reveal>
+            <h2 className="text-center font-display text-3xl font-extrabold sm:text-4xl">
+              Three things we fix, so you don’t have to worry
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {[
+              {
+                fx: "Fixed",
+                rest: " price",
+                text: "One capped price per chapter. You know the cost before the first lesson, however many sessions or doubts it takes.",
+              },
+              {
+                fx: "Fixed",
+                rest: " tutor",
+                text: "You pick one tutor after the masterclass and keep them till the final exam. No rotation, no starting over.",
+              },
+              {
+                fx: "Fix",
+                rest: " the gaps",
+                text: "With no clock running, lessons continue until the concept is clear. We measure success by the grade, not the hours logged.",
+              },
+            ].map((c, i) => (
+              <Reveal key={c.rest} delay={i * 90}>
+                <div className="h-full rounded-2xl border-2 border-primary bg-card p-6 hard-shadow">
+                  <h3 className="font-display text-xl font-extrabold">
+                    <span className="rounded-md bg-gold px-2 py-0.5 text-gold-foreground">
+                      {c.fx}
+                    </span>
+                    {c.rest}
+                  </h3>
+                  <p className="mt-3 leading-relaxed text-muted-foreground">{c.text}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Learning without the clock */}
+      <section className="py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <Reveal>
+            <h2 className="text-center font-display text-3xl font-extrabold sm:text-4xl">
+              Learning without the clock
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            <Reveal>
+              <div className="h-full rounded-2xl border border-border bg-card p-7">
+                <p className="font-hand text-2xl text-primary">The lesson doesn’t end at 60 minutes</p>
+                <p className="mt-3 leading-relaxed text-muted-foreground">
+                  If a topic is still unfinished, your tutor carries on for another 15 to 20
+                  minutes at no extra charge. Your child leaves with the concept
+                  understood, not half-done.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={100}>
+              <div className="h-full rounded-2xl border border-border bg-card p-7">
+                <p className="font-hand text-2xl text-primary">A budget you can plan around</p>
+                <p className="mt-3 leading-relaxed text-muted-foreground">
+                  Every chapter has a capped price, so you know the cost before you start.
+                  If your child has more doubts close to the exam, there are no surprise
+                  bills.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="paper-grid border-y border-border py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <Reveal>
+            <h2 className="text-center font-display text-3xl font-extrabold sm:text-4xl">
+              Words from parents
+            </h2>
+          </Reveal>
+          <div className="mt-14 grid gap-8 md:grid-cols-3">
+            {TESTIMONIALS.map((t, i) => (
+              <Reveal key={t.who} delay={i * 120}>
+                <figure
+                  className={`tape relative rounded-sm border border-border bg-card px-6 pb-6 pt-8 shadow-note ${
+                    i % 2 === 0 ? "-rotate-1" : "rotate-1"
+                  }`}
+                >
+                  <blockquote className="font-hand text-2xl leading-[1.35] text-foreground">
+                    “{t.text}”
+                  </blockquote>
+                  <figcaption className="mt-4 text-right font-hand text-xl font-bold text-primary">
+                    — {t.who}
+                  </figcaption>
+                  <span className="mt-3 inline-block rounded-full border border-dashed border-warn px-2.5 py-0.5 text-[11px] font-semibold text-warn">
+                    Sample story
+                  </span>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <Reveal>
+            <div className="relative overflow-hidden rounded-3xl bg-primary px-6 py-16 text-center text-primary-foreground sm:px-12">
+              <p className="font-hand text-2xl text-gold">Ready when you are</p>
+              <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl font-extrabold sm:text-4xl">
+                Book a masterclass for{" "}
+                <span className="rounded-lg bg-gold px-2 text-gold-foreground">
+                  €{CONFIG.demoPrice}
+                </span>{" "}
+                — meet your tutor before you commit.
+              </h2>
+              <p className="mt-4 text-primary-foreground/75">
+                Live one-to-one, on a real topic from your child’s syllabus · Launch offer,
+                was €{CONFIG.originalPrice} · {CONFIG.slotsLeft} slots left this week
+              </p>
+              <Link
+                to="/book"
+                className="mt-8 inline-flex items-center gap-2 rounded-xl bg-gold px-8 py-4 font-display text-lg font-bold text-gold-foreground transition-transform hover:-translate-y-0.5"
+              >
+                Reserve my slot
+                <ArrowRight className="size-5" />
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    </>
   );
 }

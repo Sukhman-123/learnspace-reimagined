@@ -7,10 +7,10 @@ export function SiteFooter() {
     <footer className="border-t border-border bg-primary text-primary-foreground">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <Logo className="[&_span]:text-primary-foreground [&_span.bg-gold]:text-gold-foreground" />
+          <Logo light />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-primary-foreground/80">
-            We don’t sell hours, we deliver results. One-to-one AS, A Level & IB
-            maths for Indian families in Europe.
+            We don’t sell hours, we deliver results. One-to-one AS, A Level & IB maths
+            for Indian families in Europe.
           </p>
         </div>
         <div>
