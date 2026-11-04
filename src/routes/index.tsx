@@ -10,7 +10,7 @@ import {
   UserCheck,
   Wallet,
 } from "lucide-react";
-import heroImg from "@/assets/hero-illustration.webp";
+import heroImg from "@/assets/hero-illustration.png";
 import { Reveal } from "@/components/reveal";
 import { BOARDS, CONFIG, TESTIMONIALS } from "@/data/site";
 
@@ -101,10 +101,8 @@ function Index() {
             <div className="absolute -inset-3 rounded-[2rem] bg-primary/5 sm:-inset-5" />
             <img
               src={heroImg}
-              width={1000}
-              height={728}
-              fetchPriority="high"
-              decoding="async"
+              width={1408}
+              height={1024}
               alt="A student studying maths with calculus formulas floating around"
               className="relative aspect-[1.22] w-full rounded-[1.5rem] object-cover shadow-2xl shadow-primary/15 sm:rounded-[2rem]"
             />

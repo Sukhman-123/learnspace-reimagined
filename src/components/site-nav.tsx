@@ -48,7 +48,7 @@ export function SiteNav() {
     "rounded-lg px-3 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-accent/70 hover:text-primary data-[status=active]:text-primary";
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background">
+    <header className="sticky top-0 z-40 border-b border-border/70 bg-background/90 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-3 sm:px-5 sm:py-3.5">
         <Logo />
         <div className="ml-auto hidden items-center gap-1 sm:flex">

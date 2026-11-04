@@ -4,22 +4,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@font-face {
-  font-family: "Bricolage Grotesque";
-  font-style: normal;
-  font-weight: 500 800;
-  font-display: swap;
-  src: url("/fonts/bricolage-grotesque-latin.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "DM Sans";
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("/fonts/dm-sans-latin.woff2") format("woff2");
-}
-
 /*
  * Fixed Tutor design system — "graph-paper notebook"
  * Navy ink, warm paper, gold highlighter, handwritten accents.
