@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Award, BookOpen, GraduationCap, Linkedin, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/reveal";
-import { BRAND, COURSES, TOPICS, TUTOR, initials } from "@/data/site";
+import tutorPhoto from "@/assets/arvind-suthar.webp";
+import { BRAND, COURSES, TOPICS, TUTOR } from "@/data/site";
 
 export const Route = createFileRoute("/tutors")({
   component: TutorPage,
@@ -25,14 +26,16 @@ function TutorPage() {
             <Sparkles className="size-4" /> One student. One fixed tutor.
           </p>
           <div className="mt-8 grid items-start gap-10 lg:grid-cols-[.85fr_1.15fr] lg:gap-16">
-            <aside className="relative mx-auto w-full max-w-sm overflow-hidden rounded-[2rem] bg-primary p-7 text-primary-foreground shadow-2xl shadow-primary/20">
-              <div className="absolute inset-5 rounded-[1.5rem] border border-white/20" />
-              <div className="relative grid aspect-[4/3] place-items-center">
-                <div className="grid size-36 place-items-center rounded-full bg-white/15 font-display text-5xl font-extrabold text-white ring-8 ring-white/10">
-                  {initials(TUTOR.name)}
-                </div>
-              </div>
-              <div className="relative rounded-2xl bg-white p-4 text-primary shadow-lg">
+            <aside className="relative mx-auto w-full max-w-sm overflow-hidden rounded-[2rem] bg-primary shadow-2xl shadow-primary/20">
+              <img
+                src={tutorPhoto}
+                width={700}
+                height={1050}
+                decoding="async"
+                alt={`${TUTOR.name}, mathematics tutor`}
+                className="aspect-[4/5] w-full object-cover object-[center_24%]"
+              />
+              <div className="relative bg-white p-4 text-primary">
                 <p className="flex items-center gap-2 text-sm font-bold">
                   <GraduationCap className="size-4" /> {TUTOR.qualification}
                 </p>

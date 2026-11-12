@@ -10,6 +10,7 @@ import {
   NotebookPen,
   UsersRound,
 } from "lucide-react";
+import tutorPhoto from "@/assets/arvind-suthar.webp";
 import { Reveal } from "@/components/reveal";
 import {
   BRAND,
@@ -104,38 +105,37 @@ function Index() {
 
           <div className="relative mx-auto w-full max-w-xl lg:ml-auto">
             <div className="absolute -inset-3 rounded-[2rem] bg-primary/5 sm:-inset-5" />
-            <div className="relative overflow-hidden rounded-[1.5rem] border-2 border-primary/10 bg-primary p-7 text-primary-foreground shadow-2xl shadow-primary/15 sm:rounded-[2rem] sm:p-10">
-              <div className="absolute -right-16 -top-20 size-64 rounded-full border border-white/10" />
-              <div className="absolute -bottom-28 -left-20 size-72 rounded-full border border-white/10" />
-              <div className="relative">
-                <p className="text-sm font-bold uppercase tracking-[.16em] text-gold">Your tutor</p>
-                <h2 className="mt-3 font-display text-4xl font-extrabold sm:text-5xl">
+            <figure className="relative overflow-hidden rounded-[1.5rem] border-2 border-primary/10 bg-primary shadow-2xl shadow-primary/15 sm:rounded-[2rem]">
+              <img
+                src={tutorPhoto}
+                width={700}
+                height={1050}
+                fetchPriority="high"
+                decoding="async"
+                alt={`${TUTOR.name}, mathematics tutor`}
+                className="h-[30rem] w-full object-cover object-[center_24%] sm:h-[34rem]"
+              />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary via-primary/95 to-transparent px-5 pb-5 pt-20 text-primary-foreground sm:px-7 sm:pb-7">
+                <p className="text-xs font-bold uppercase tracking-[.16em] text-gold">
+                  Your fixed tutor
+                </p>
+                <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
                   {TUTOR.name}
                 </h2>
-                <p className="mt-3 max-w-sm leading-relaxed text-primary-foreground/80">
+                <p className="mt-1 text-sm text-primary-foreground/80">
                   {TUTOR.qualification} · {TUTOR.institution}
                 </p>
-                <div className="mt-8 grid grid-cols-2 gap-3">
-                  {TUTOR.highlights.slice(0, 2).map((item) => (
-                    <div key={item.label} className="rounded-2xl bg-white/10 p-4">
-                      <p className="font-display text-2xl font-extrabold text-gold">{item.value}</p>
-                      <p className="mt-1 text-xs leading-relaxed text-primary-foreground/75">
-                        {item.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
                 <a
                   href={BRAND.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-bold underline decoration-gold underline-offset-4"
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-bold underline decoration-gold underline-offset-4"
                 >
-                  View Arvind on LinkedIn <ArrowRight className="size-4" />
+                  View LinkedIn profile <ArrowRight className="size-4" />
                 </a>
-              </div>
-            </div>
-            <div className="relative mx-3 -mt-5 rounded-2xl border border-white/70 bg-white p-4 shadow-xl shadow-primary/10 sm:mx-8">
+              </figcaption>
+            </figure>
+            <div className="relative mx-3 -mt-3 rounded-2xl border border-white/70 bg-white p-4 shadow-xl shadow-primary/10 sm:mx-8">
               <p className="flex items-center gap-2 text-xs font-bold text-primary">
                 <CalendarDays className="size-4" /> Start with a personal plan
               </p>
