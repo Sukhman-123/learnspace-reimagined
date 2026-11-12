@@ -1,29 +1,34 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
-import logoImage from "@/assets/fixed-tutor-logo.png";
+import { BRAND } from "@/data/site";
 
 const LINKS = [
   { to: "/", label: "Home" },
-  { to: "/tutors", label: "Our tutors" },
+  { to: "/tutors", label: "Meet Arvind" },
   { to: "/pricing", label: "Pricing" },
-  { to: "/dashboard", label: "Family hub" },
+  { to: "/dashboard", label: "Family hub preview" },
 ] as const;
 
 export function Logo({ light }: { light?: boolean }) {
   return (
     <Link
       to="/"
-      className={`inline-flex shrink-0 overflow-hidden rounded-xl ${light ? "bg-background p-1.5" : ""}`}
-      aria-label="Fixed Tutor home"
+      className="inline-flex shrink-0 items-center gap-2.5"
+      aria-label={`${BRAND.name} home`}
     >
       <img
-        src={logoImage}
+        src="/favicon.svg"
         alt=""
-        width={974}
-        height={300}
-        className="block h-auto w-[136px] sm:w-[174px]"
+        width={40}
+        height={40}
+        className={`block size-9 rounded-xl sm:size-10 ${light ? "bg-background p-1" : ""}`}
       />
+      <span
+        className={`font-display text-lg font-extrabold tracking-tight sm:text-xl ${light ? "text-primary-foreground" : "text-primary"}`}
+      >
+        {BRAND.name}
+      </span>
     </Link>
   );
 }
@@ -62,7 +67,7 @@ export function SiteNav() {
           to="/book"
           className="ml-2 hidden items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-primary-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md sm:inline-flex"
         >
-          Book a masterclass <ArrowRight className="size-4" />
+          Request a masterclass <ArrowRight className="size-4" />
         </Link>
         <button
           ref={menuButtonRef}
@@ -98,7 +103,7 @@ export function SiteNav() {
               onClick={() => setOpen(false)}
               className="rounded-xl bg-primary px-3 py-3 text-center text-sm font-bold text-primary-foreground"
             >
-              Book a masterclass
+              Request a masterclass
             </Link>
             <Link
               to="/pricing"

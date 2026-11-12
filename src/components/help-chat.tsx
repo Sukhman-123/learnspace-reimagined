@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { MessageCircleQuestion, Send, X } from "lucide-react";
-import { CONFIG, HELP, TOPICS } from "@/data/site";
+import { BRAND, HELP, HELP_TOPICS } from "@/data/site";
 
 type Msg = { text: string; from: "bot" | "me"; link?: { href: string; label: string } };
 
@@ -8,7 +8,7 @@ export function HelpChat() {
   const [open, setOpen] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([
     {
-      text: "Hi! Ask us anything about the masterclass, pricing or tutors — or tap a question below.",
+      text: `Hi! Ask us about the masterclass, pricing or courses — or tap a question below.`,
       from: "bot",
     },
   ]);
@@ -29,13 +29,13 @@ export function HelpChat() {
   }, [msgs, open]);
 
   const reply = (key: string) => {
-    const text = HELP[key] ?? HELP["hum"] ?? "Happy to help personally. Reach us here:";
+    const text = HELP[key] ?? HELP.hum;
     const msg: Msg =
       key === "pay" || key === "hum"
         ? {
             text,
             from: "bot",
-            link: { href: `mailto:${CONFIG.email}`, label: CONFIG.email },
+            link: { href: `mailto:${BRAND.email}`, label: BRAND.email },
           }
         : { text, from: "bot" };
     setMsgs((m) => [...m, msg]);
@@ -76,7 +76,7 @@ export function HelpChat() {
         className={`fixed bottom-20 right-5 z-50 ${open ? "flex" : "hidden"} max-h-[70vh] w-[min(380px,calc(100vw-40px))] flex-col overflow-hidden rounded-2xl border-2 border-foreground bg-card shadow-hard`}
       >
         <div className="flex items-center justify-between bg-primary px-4 py-3 text-primary-foreground">
-          <span className="font-display text-sm font-bold">Fixed Tutor help</span>
+          <span className="font-display text-sm font-bold">{BRAND.name} help</span>
           <button
             type="button"
             aria-label="Close chat"
@@ -115,7 +115,7 @@ export function HelpChat() {
           ))}
         </div>
         <div className="flex flex-wrap gap-1.5 px-3 pb-2">
-          {TOPICS.map(([label, key]) => (
+          {HELP_TOPICS.map(([label, key]) => (
             <button
               key={key}
               type="button"

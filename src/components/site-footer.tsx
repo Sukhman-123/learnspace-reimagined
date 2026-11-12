@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { CONFIG } from "@/data/site";
+import { BRAND, COURSES, FORMAT, TUTOR, WAITLIST } from "@/data/site";
 import { Logo } from "@/components/site-nav";
 
 export function SiteFooter() {
@@ -9,8 +9,7 @@ export function SiteFooter() {
         <div>
           <Logo light />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-primary-foreground/80">
-            One-to-one AS, A Level and IB maths tutoring. One dedicated tutor from the first
-            question to the final exam.
+            {BRAND.tagline} {TUTOR.name} teaches Cambridge CIE and Edexcel maths online.
           </p>
         </div>
         <div>
@@ -25,12 +24,12 @@ export function SiteFooter() {
             </li>
             <li>
               <Link to="/tutors" className="text-primary-foreground/85 hover:text-gold">
-                Meet your tutor
+                Meet Arvind
               </Link>
             </li>
             <li>
               <Link to="/dashboard" className="text-primary-foreground/85 hover:text-gold">
-                Family learning hub
+                Family hub preview
               </Link>
             </li>
             <li>
@@ -40,7 +39,7 @@ export function SiteFooter() {
             </li>
             <li>
               <Link to="/book" className="text-primary-foreground/85 hover:text-gold">
-                Book a masterclass
+                Request a masterclass
               </Link>
             </li>
           </ul>
@@ -50,21 +49,28 @@ export function SiteFooter() {
             Good to know
           </h3>
           <ul className="mt-4 space-y-2.5 text-sm text-primary-foreground/85">
-            <li>All exam boards</li>
-            <li>Lessons in UK / CET-friendly evening slots</li>
+            <li>
+              {COURSES.map((course) => course.board)
+                .filter((board, index, all) => all.indexOf(board) === index)
+                .join(" and ")}
+            </li>
+            <li>
+              {FORMAT.availability.join(" and ")} · {FORMAT.timeZones.join(" / ")}
+            </li>
+            <li>{WAITLIST.courses.join(" and ")} waitlist</li>
             <li>
               <a
-                href={`mailto:${CONFIG.email}`}
+                href={`mailto:${BRAND.email}`}
                 className="underline decoration-gold underline-offset-4 hover:text-gold"
               >
-                {CONFIG.email}
+                {BRAND.email}
               </a>
             </li>
           </ul>
         </div>
       </div>
       <div className="border-t border-primary-foreground/15 py-5 text-center text-xs text-primary-foreground/60">
-        © {new Date().getFullYear()} Fixed Tutor · One dedicated maths tutor
+        © {new Date().getFullYear()} {BRAND.name} · {BRAND.tagline}
       </div>
     </footer>
   );

@@ -15,6 +15,10 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { HelpChat } from "@/components/help-chat";
+import { BRAND, COURSES, TUTOR } from "@/data/site";
+
+const siteTitle = `${BRAND.name} — ${TUTOR.name}, IIT Roorkee Mathematics Tutor`;
+const siteDescription = `One fixed tutor. One fixed price. ${TUTOR.name} teaches ${COURSES.map((course) => `${course.board} ${course.level}`).join(" and ")}, with unlimited doubt solving.`;
 
 function NotFoundComponent() {
   return (
@@ -76,22 +80,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Fixed Tutor — IIT Maths Tutors for AS, A Level & IB" },
-      {
-        name: "description",
-        content:
-          "One-to-one AS, A Level and IB maths tutoring with a dedicated tutor, capped prices per chapter, and unlimited doubt solving.",
-      },
-      { property: "og:title", content: "Fixed Tutor — IIT Maths Tutors for AS, A Level & IB" },
-      {
-        property: "og:description",
-        content:
-          "One dedicated IIT-trained maths tutor, capped chapter prices, and support through the final exam.",
-      },
+      { title: siteTitle },
+      { name: "description", content: siteDescription },
+      { property: "og:title", content: siteTitle },
+      { property: "og:description", content: siteDescription },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: `https://${BRAND.domain}` },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      { rel: "canonical", href: `https://${BRAND.domain}` },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

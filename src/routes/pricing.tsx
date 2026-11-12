@@ -1,184 +1,147 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Clock3, FileText, MessageCircleMore, Wallet } from "lucide-react";
 import { Reveal } from "@/components/reveal";
-import { CHAPTERS, CONFIG } from "@/data/site";
+import { BRAND, COURSES, OFFER, TUTOR } from "@/data/site";
 
 export const Route = createFileRoute("/pricing")({
   component: PricingPage,
   head: () => ({
     meta: [
-      { title: "Pricing — Fixed Prices, Capped per Chapter | Fixed Tutor" },
+      { title: `Chapter Pricing | ${BRAND.name}` },
       {
         name: "description",
-        content:
-          "A €10 masterclass, then one capped price per chapter: unlimited sessions and doubts inside each chapter, with the same tutor from start to finish.",
+        content: `A €${OFFER.masterclassPrice} ${OFFER.masterclassMinutes}-minute masterclass, credited toward the first chapter, followed by fixed chapter prices shared before you start.`,
       },
-      {
-        property: "og:title",
-        content: "Pricing — Fixed Prices, Capped per Chapter | Fixed Tutor",
-      },
+      { property: "og:title", content: `Chapter Pricing | ${BRAND.name}` },
       {
         property: "og:description",
-        content:
-          "A €10 masterclass, then one capped price per chapter with unlimited sessions and doubts.",
+        content: "No hourly billing. Get the exact price for each chapter before you begin.",
       },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
 });
 
 function PricingPage() {
-  const asChapters = CHAPTERS.filter((c) => c.lv === "AS");
-  const a2Chapters = CHAPTERS.filter((c) => c.lv === "A2");
-
   return (
     <section className="py-16">
       <div className="mx-auto max-w-6xl px-5">
         <Reveal>
-          <h1 className="font-display text-4xl font-extrabold sm:text-5xl">
-            <span className="highlight">Fixed</span> pricing: one capped price per chapter
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-            The only thing you pay before meeting your tutor is the masterclass. After that, every
-            chapter has one maximum price — however many sessions or doubts it takes.
-          </p>
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[.16em] text-primary">
+              Straightforward pricing
+            </p>
+            <h1 className="mt-3 font-display text-4xl font-extrabold sm:text-5xl">
+              One fixed price for each chapter
+            </h1>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+              No hourly billing. {TUTOR.name} maps out a personal chapter plan and shares each
+              chapter’s fixed price before you decide to continue.
+            </p>
+          </div>
         </Reveal>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_1.2fr]">
           <Reveal>
-            <div className="flex h-full flex-col rounded-2xl border-2 border-foreground bg-card p-7 hard-shadow">
-              <p className="font-display text-4xl font-extrabold">
-                <span className="text-base font-medium text-muted-foreground line-through">
-                  €{CONFIG.originalPrice}
-                </span>{" "}
-                €{CONFIG.demoPrice}
+            <article className="h-full rounded-3xl border-2 border-foreground bg-card p-7 hard-shadow">
+              <p className="font-display text-4xl font-extrabold text-primary">
+                €{OFFER.masterclassPrice}
               </p>
-              <h2 className="mt-2 flex items-center gap-2 font-display text-lg font-bold">
-                Masterclass
-                <span className="rounded-full bg-gold px-2.5 py-0.5 text-xs font-bold text-gold-foreground">
-                  Launch offer
-                </span>
+              <h2 className="mt-2 font-display text-xl font-bold">
+                {OFFER.masterclassMinutes}-minute 1:1 masterclass
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                A live one-to-one masterclass on a real topic, with the tutor of your choice.
+                A first lesson to check the student’s level, experience the teaching and map the
+                next steps.
               </p>
-              <Link
-                to="/book"
-                className="mt-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gold px-5 py-3 pt-3 text-sm font-bold text-gold-foreground transition-transform hover:-translate-y-0.5 [margin-top:1.5rem]"
-              >
-                Book now
-                <ArrowRight className="size-4" />
-              </Link>
-            </div>
-          </Reveal>
-
-          <Reveal delay={90}>
-            <div className="flex h-full flex-col rounded-2xl border-2 border-primary bg-card p-7 hard-shadow">
-              <p className="font-display text-4xl font-extrabold text-primary">Fixed</p>
-              <h2 className="mt-2 font-display text-lg font-bold">Capped per chapter</h2>
-              <ul className="mt-3 space-y-2 text-sm">
-                {[
-                  "Fixed maximum per chapter",
-                  "Unlimited sessions and doubts inside it",
-                  "Same tutor, start to finish",
-                ].map((li) => (
-                  <li key={li} className="flex gap-2 text-muted-foreground">
-                    <Check className="mt-0.5 size-4 shrink-0 text-success" />
-                    {li}
+              <p className="mt-3 text-sm font-bold text-success">{OFFER.masterclassCredit}</p>
+              <ul className="mt-5 space-y-2">
+                {OFFER.masterclassIncludes.map((item) => (
+                  <li key={item} className="flex gap-2 text-sm text-muted-foreground">
+                    <Check className="mt-0.5 size-4 shrink-0 text-success" /> {item}
                   </li>
                 ))}
               </ul>
-            </div>
+              <Link
+                to="/book"
+                className="mt-7 inline-flex items-center gap-2 rounded-xl bg-gold px-5 py-3 font-bold text-gold-foreground"
+              >
+                Request a masterclass <ArrowRight className="size-4" />
+              </Link>
+            </article>
           </Reveal>
 
-          <Reveal delay={180}>
-            <div className="flex h-full flex-col rounded-2xl border-2 border-foreground bg-card p-7 hard-shadow">
-              <p className="font-display text-4xl font-extrabold text-primary">Till exams</p>
-              <h2 className="mt-2 font-display text-lg font-bold">Fixed tutor</h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Chapter after chapter, with the tutor you picked, up to the final paper.
-              </p>
-            </div>
+          <Reveal delay={100}>
+            <article className="h-full rounded-3xl border-2 border-primary bg-card p-7">
+              <div className="flex items-center gap-3">
+                <Wallet className="size-6 text-primary" />
+                <h2 className="font-display text-2xl font-extrabold">Chapter-by-chapter pricing</h2>
+              </div>
+              <p className="mt-4 leading-relaxed text-muted-foreground">{OFFER.chapterPricing}</p>
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                {[
+                  {
+                    icon: FileText,
+                    title: "See your plan",
+                    text: "Get a personal chapter plan with exact prices after your level check.",
+                  },
+                  {
+                    icon: Clock3,
+                    title: "No hourly meter",
+                    text: "The price is tied to the chapter, not the minutes spent teaching.",
+                  },
+                  { icon: MessageCircleMore, title: "Doubts included", text: OFFER.doubtSupport },
+                  {
+                    icon: Check,
+                    title: "Choose with clarity",
+                    text: "Review your chapter prices before deciding to continue.",
+                  },
+                ].map((item) => (
+                  <div key={item.title} className="rounded-2xl bg-secondary/70 p-4">
+                    <item.icon className="size-5 text-primary" />
+                    <h3 className="mt-2 font-display font-bold">{item.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                      {item.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </article>
           </Reveal>
         </div>
 
         <Reveal>
-          <h2 className="mt-16 font-display text-2xl font-extrabold sm:text-3xl">Chapter prices</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            These are the capped prices — the most a chapter can cost, however long it takes.
-          </p>
-        </Reveal>
-
-        <Reveal delay={100}>
-          <div className="mt-6 overflow-hidden rounded-2xl border-2 border-foreground bg-card hard-shadow">
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="border-b-2 border-foreground bg-secondary text-xs uppercase tracking-wider text-muted-foreground">
-                  <th className="px-5 py-3 font-bold">Chapter</th>
-                  <th className="hidden px-5 py-3 font-bold sm:table-cell">Level</th>
-                  <th className="px-5 py-3 text-right font-bold">Capped price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="bg-gold-soft">
-                  <td
-                    colSpan={3}
-                    className="px-5 py-2 font-display text-xs font-bold uppercase tracking-wider text-primary"
-                  >
-                    AS Maths
-                  </td>
-                </tr>
-                {asChapters.map((c) => (
-                  <tr key={c.n} className="border-b border-border">
-                    <td className="px-5 py-3.5 font-medium">{c.n}</td>
-                    <td className="hidden px-5 py-3.5 text-muted-foreground sm:table-cell">
-                      {c.lv}
-                    </td>
-                    <td className="px-5 py-3.5 text-right font-display text-base font-extrabold">
-                      €{c.price}
-                    </td>
-                  </tr>
-                ))}
-                <tr className="bg-gold-soft">
-                  <td
-                    colSpan={3}
-                    className="px-5 py-2 font-display text-xs font-bold uppercase tracking-wider text-primary"
-                  >
-                    A2 Maths
-                  </td>
-                </tr>
-                {a2Chapters.map((c) => (
-                  <tr key={c.n} className="border-b border-border last:border-b-0">
-                    <td className="px-5 py-3.5 font-medium">{c.n}</td>
-                    <td className="hidden px-5 py-3.5 text-muted-foreground sm:table-cell">
-                      {c.lv}
-                    </td>
-                    <td className="px-5 py-3.5 text-right font-display text-base font-extrabold">
-                      €{c.price}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <section className="mt-14 rounded-3xl bg-secondary p-6 sm:p-8">
+            <h2 className="font-display text-2xl font-extrabold">Courses covered</h2>
+            <div className="mt-5 grid gap-3 md:grid-cols-3">
+              {COURSES.map((course) => (
+                <article key={course.id} className="rounded-2xl border border-border bg-white p-4">
+                  <p className="text-xs font-bold uppercase tracking-wider text-primary">
+                    {course.board}
+                  </p>
+                  <h3 className="mt-2 font-display text-lg font-bold">{course.level}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {course.subject}
+                    {course.code ? ` · ${course.code}` : ""}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
         </Reveal>
 
         <Reveal>
           <div className="mt-14 rounded-3xl bg-primary px-6 py-12 text-center text-primary-foreground sm:px-12">
             <h2 className="font-display text-2xl font-extrabold sm:text-3xl">
-              Start with the €{CONFIG.demoPrice} masterclass
+              Start with a clear plan
             </h2>
             <p className="mt-3 text-primary-foreground/75">
-              Meet your tutor, see the teaching style, then decide. {CONFIG.slotsLeft} slots left
-              this week.
+              Meet {TUTOR.name}, check the student’s level and receive the chapter prices.
             </p>
             <Link
               to="/book"
-              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-gold px-8 py-3.5 font-display text-base font-bold text-gold-foreground transition-transform hover:-translate-y-0.5"
+              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-gold px-8 py-3.5 font-display text-base font-bold text-gold-foreground"
             >
-              Book a masterclass
-              <ArrowRight className="size-4" />
+              Request the €{OFFER.masterclassPrice} masterclass <ArrowRight className="size-4" />
             </Link>
           </div>
         </Reveal>
