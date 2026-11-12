@@ -66,9 +66,17 @@ function DashboardPage() {
               </div>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 Lessons are online, usually around {FORMAT.lessonMinutes} minutes, with evening and
-                weekend availability in {FORMAT.timeZones.join(" and ")}. Confirmed lesson dates
-                would appear here once a booking calendar is connected.
+                weekend availability in {FORMAT.timeZones.join(" and ")}. Select an available time
+                and manage your booking through Cal.id.
               </p>
+              <a
+                href={BRAND.bookingUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary"
+              >
+                View times and book on Cal.id <ArrowRight className="size-4" />
+              </a>
             </section>
 
             <section className="rounded-2xl border border-border bg-white p-5 shadow-sm sm:p-6">
@@ -161,8 +169,8 @@ function DashboardPage() {
           </aside>
         </div>
         <p className="mt-5 text-center text-xs text-muted-foreground">
-          Preview only. This site does not yet connect to a live student account, booking calendar,
-          or progress database.
+          Preview only. Booking and payment are managed on Cal.id; student-specific progress and
+          lesson materials are not connected to this preview.
         </p>
       </div>
     </section>

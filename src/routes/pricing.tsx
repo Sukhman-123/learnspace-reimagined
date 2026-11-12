@@ -61,12 +61,14 @@ function PricingPage() {
                   </li>
                 ))}
               </ul>
-              <Link
-                to="/book"
+              <a
+                href={BRAND.bookingUrl}
+                target="_blank"
+                rel="noreferrer"
                 className="mt-7 inline-flex items-center gap-2 rounded-xl bg-gold px-5 py-3 font-bold text-gold-foreground"
               >
-                Request a masterclass <ArrowRight className="size-4" />
-              </Link>
+                Schedule on Cal.id <ArrowRight className="size-4" />
+              </a>
             </article>
           </Reveal>
 
@@ -137,12 +139,14 @@ function PricingPage() {
             <p className="mt-3 text-primary-foreground/75">
               Meet {TUTOR.name}, check the student’s level and receive the chapter prices.
             </p>
-            <Link
-              to="/book"
+            <a
+              href={BRAND.bookingUrl}
+              target="_blank"
+              rel="noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-xl bg-gold px-8 py-3.5 font-display text-base font-bold text-gold-foreground"
             >
-              Request the €{OFFER.masterclassPrice} masterclass <ArrowRight className="size-4" />
-            </Link>
+              Schedule and pay on Cal.id <ArrowRight className="size-4" />
+            </a>
           </div>
         </Reveal>
       </div>

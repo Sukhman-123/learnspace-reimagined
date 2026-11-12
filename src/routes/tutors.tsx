@@ -139,12 +139,14 @@ function TutorPage() {
         </section>
 
         <div className="mt-10 text-center">
-          <Link
-            to="/book"
+          <a
+            href={BRAND.bookingUrl}
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-display font-bold text-primary-foreground"
           >
-            Request a masterclass <ArrowRight className="size-4" />
-          </Link>
+            Schedule and pay on Cal.id <ArrowRight className="size-4" />
+          </a>
         </div>
       </div>
     </section>

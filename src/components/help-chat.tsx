@@ -31,13 +31,11 @@ export function HelpChat() {
   const reply = (key: string) => {
     const text = HELP[key] ?? HELP.hum;
     const msg: Msg =
-      key === "pay" || key === "hum"
-        ? {
-            text,
-            from: "bot",
-            link: { href: `mailto:${BRAND.email}`, label: BRAND.email },
-          }
-        : { text, from: "bot" };
+      key === "booking"
+        ? { text, from: "bot", link: { href: BRAND.bookingUrl, label: "Open Cal.id" } }
+        : key === "hum"
+          ? { text, from: "bot", link: { href: `mailto:${BRAND.email}`, label: BRAND.email } }
+          : { text, from: "bot" };
     setMsgs((m) => [...m, msg]);
   };
 
@@ -105,6 +103,8 @@ export function HelpChat() {
                 {m.link && (
                   <a
                     href={m.link.href}
+                    target={m.link.href.startsWith("https://") ? "_blank" : undefined}
+                    rel={m.link.href.startsWith("https://") ? "noreferrer" : undefined}
                     className="mt-1 block font-bold text-gold-foreground underline underline-offset-2"
                   >
                     {m.link.label}

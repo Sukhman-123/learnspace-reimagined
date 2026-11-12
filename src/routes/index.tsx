@@ -70,13 +70,15 @@ function Index() {
               solving.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Link
-                to="/book"
+              <a
+                href={BRAND.bookingUrl}
+                target="_blank"
+                rel="noreferrer"
                 className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-display text-base font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 hover:shadow-xl"
               >
-                Book a {OFFER.masterclassMinutes}-minute masterclass
+                Schedule a masterclass
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+              </a>
               <Link
                 to="/tutors"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-white/80 px-6 py-3.5 font-display text-base font-bold text-foreground transition-colors hover:bg-white"
@@ -335,12 +337,14 @@ function Index() {
                   </li>
                 ))}
               </ul>
-              <Link
-                to="/book"
+              <a
+                href={BRAND.bookingUrl}
+                target="_blank"
+                rel="noreferrer"
                 className="mt-7 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 font-bold text-primary-foreground"
               >
-                Request a masterclass <ArrowRight className="size-4" />
-              </Link>
+                Schedule and pay with Cal.id <ArrowRight className="size-4" />
+              </a>
             </article>
           </div>
         </div>
@@ -358,12 +362,14 @@ function Index() {
             <p className="mt-4 text-primary-foreground/75">
               €{OFFER.masterclassPrice}, credited toward your first chapter.
             </p>
-            <Link
-              to="/book"
+            <a
+              href={BRAND.bookingUrl}
+              target="_blank"
+              rel="noreferrer"
               className="mt-8 inline-flex items-center gap-2 rounded-xl bg-gold px-8 py-4 font-display text-lg font-bold text-gold-foreground"
             >
-              Request your masterclass <ArrowRight className="size-5" />
-            </Link>
+              Schedule and pay on Cal.id <ArrowRight className="size-5" />
+            </a>
           </div>
         </div>
       </section>

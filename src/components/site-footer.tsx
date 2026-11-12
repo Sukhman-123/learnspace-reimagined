@@ -38,9 +38,14 @@ export function SiteFooter() {
               </Link>
             </li>
             <li>
-              <Link to="/book" className="text-primary-foreground/85 hover:text-gold">
-                Request a masterclass
-              </Link>
+              <a
+                href={BRAND.bookingUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary-foreground/85 hover:text-gold"
+              >
+                Schedule and pay
+              </a>
             </li>
           </ul>
         </div>

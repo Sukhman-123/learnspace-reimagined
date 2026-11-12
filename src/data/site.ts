@@ -9,6 +9,7 @@ export const BRAND = {
   tagline: "One fixed tutor. One fixed price. Until your final exam.",
   email: "fixedtutors@gmail.com",
   linkedin: "https://linkedin.com/in/arvind-suthar-372811214",
+  bookingUrl: "https://cal.id/fixedtutors",
   currency: "EUR",
   currencySymbol: "€",
 } as const;
@@ -135,6 +136,7 @@ export const WAITLIST = {
 export const CONTACT_EMAIL = BRAND.email;
 
 export const HELP: Record<string, string> = {
+  booking: `Choose an available time and complete payment through our Cal.id page. The €${OFFER.masterclassPrice} fee is credited toward your first chapter.`,
   masterclass: `The ${OFFER.masterclassMinutes}-minute 1:1 masterclass costs €${OFFER.masterclassPrice}. It includes a level check, live mini-lesson, personal plan with chapter prices, recording and notes. The fee is credited toward your first chapter.`,
   pricing:
     "Each chapter has one fixed price, shared with you before you begin. The price is not based on the number of hours. Get in touch for a plan based on your level and topics.",
@@ -145,6 +147,7 @@ export const HELP: Record<string, string> = {
 };
 
 export const HELP_TOPICS: Array<[string, string]> = [
+  ["Schedule and pay", "booking"],
   ["What’s included in the masterclass?", "masterclass"],
   ["How does chapter pricing work?", "pricing"],
   ["Who will teach me?", "tutor"],

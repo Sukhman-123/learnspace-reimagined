@@ -63,12 +63,14 @@ export function SiteNav() {
             </Link>
           ))}
         </div>
-        <Link
-          to="/book"
+        <a
+          href={BRAND.bookingUrl}
+          target="_blank"
+          rel="noreferrer"
           className="ml-2 hidden items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-primary-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md sm:inline-flex"
         >
-          Request a masterclass <ArrowRight className="size-4" />
-        </Link>
+          Schedule & pay <ArrowRight className="size-4" />
+        </a>
         <button
           ref={menuButtonRef}
           type="button"
@@ -98,13 +100,15 @@ export function SiteNav() {
             </Link>
           ))}
           <div className="mt-2 grid grid-cols-2 gap-2 border-t border-border pt-3">
-            <Link
-              to="/book"
+            <a
+              href={BRAND.bookingUrl}
+              target="_blank"
+              rel="noreferrer"
               onClick={() => setOpen(false)}
               className="rounded-xl bg-primary px-3 py-3 text-center text-sm font-bold text-primary-foreground"
             >
-              Request a masterclass
-            </Link>
+              Schedule & pay
+            </a>
             <Link
               to="/pricing"
               onClick={() => setOpen(false)}
