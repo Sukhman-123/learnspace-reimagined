@@ -1,29 +1,58 @@
-# LearnSpace Reimagined
+# Fixed Tutors
 
-This is my html file which contains a website which is static, not so new school, aesthetic.
-We need to build a website using the content in the html.
+Fixed Tutors is a responsive maths tutoring website for families looking for one consistent tutor, clear chapter-based pricing, and ongoing doubt support. The site introduces tutor Arvind Suthar and his Cambridge CIE 9709 AS Level and Edexcel A/AS Level teaching, explains the masterclass and pricing model, and links visitors to Cal.id to schedule and pay.
 
-Help me create the best looking edtech website which gives easier UI navigation, new school UI/UX and more.
+- **Tagline:** One fixed tutor. One fixed price. Until your final exam.
+- **Website:** fixedtutors.com
+- **Booking and payment:** [cal.id/fixedtutors](https://cal.id/fixedtutors)
+- **Contact:** fixedtutors@gmail.com
 
-This project was built with [Lovable](https://lovable.dev).
+## Site pages
 
-**Live app**: https://learnspace-reimagined.lovable.app
+- **Home** — tutoring approach, current courses and topics, lesson format, and masterclass details.
+- **Tutor profile** — Arvind’s qualifications, experience, achievements, and LinkedIn profile.
+- **Pricing** — explains the €10, 45-minute masterclass and fixed chapter-price model. The masterclass fee is credited toward the first chapter; exact chapter prices are shared in the student’s personal plan.
+- **Booking information** — sends visitors to Cal.id, where scheduling and payment are managed.
+- **Family hub preview** — an illustrative page. It does not display live student schedules, progress, or lesson materials.
 
-## Build with Lovable
+## Content updates
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/f8c77543-8eba-4bf4-bf25-dfbde4f86f76).
+Most client-approved site content is centralized in [`src/data/site.ts`](src/data/site.ts). Update the brand details, tutor profile, courses, topics, teaching approach, lesson format, masterclass terms, and booking URL there. The homepage, tutor profile, pricing page, booking information, footer, and help chat use this shared content.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+The site is not connected to a content management system or student database. Editing the content source requires a new build and deployment. Booking and payment are handled on Cal.id; this project does not process or store them.
 
-## Development
+## Tech stack
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+- React and TypeScript
+- TanStack Start and TanStack Router
+- Vite
+- Tailwind CSS
+- Bun for dependency management and scripts
+- Netlify for deployment
+
+## Requirements
+
+Install [Bun](https://bun.sh/) and use a compatible Node.js release. The repository includes a Bun lockfile and an `.nvmrc` file.
+
+## Run locally
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+git clone <repository-url>
+cd <repository-directory>
+bun install --frozen-lockfile
+bun run dev
 ```
+
+Vite prints the local development URL in the terminal.
+
+## Available commands
+
+```sh
+bun run build       # Create the production build
+bun run preview     # Preview the Vite build locally
+bun run lint        # Run ESLint
+bun run test        # Run the Vitest suite
+bun run test:watch  # Run tests in watch mode
+```
+
+The production build writes the public site to `dist`. Netlify is configured to run `bun run build` and publish that directory.
